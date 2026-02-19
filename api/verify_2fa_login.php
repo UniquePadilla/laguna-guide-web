@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 include '../db_connect.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
-$code = trim($data['code'] ?? '');
+$code = $data['code'] ?? '';
 
 if (empty($code)) {
     echo json_encode(['success' => false, 'message' => 'Code is required']);

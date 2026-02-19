@@ -3,10 +3,10 @@ import mysql.connector
 import json
 
 DB_CONFIG = {
-    'user': 'if0_41198487',
+    'user': 'if0_41199400',
     'password': 'uniqueken112',
-    'host': 'sql303.infinityfree.com',
-    'database': 'if0_41198487_tourist_guide_db',
+    'host': 'sql113.infinityfree.com',
+    'database': 'if0_41199400_tourist_guide_db',
     'port': 3306
 }
 

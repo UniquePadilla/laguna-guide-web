@@ -223,39 +223,32 @@
         // Sign In Logic
         document.getElementById('signin-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Check if we are in 2FA mode
-            const twoFaFields = document.getElementById('2fa-fields');
-            if (twoFaFields.style.display === 'block') {
-                // --- 2FA VERIFICATION ---
-                const code = document.getElementById('2fa-code').value;
-                if (!code) {
-                    showModal('Please enter the verification code.');
-                    return;
-                }
 
+            // Check if 2FA is visible
+            const is2FA = document.getElementById('2fa-fields').style.display !== 'none';
+            
+            if (is2FA) {
+                // Verify 2FA
+                const code = document.getElementById('2fa-code').value;
                 try {
                     const response = await fetch('api/verify_2fa_login.php', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ code: code })
+                        body: JSON.stringify({ code })
                     });
-                    
                     const result = await response.json();
-                    
                     if (result.success) {
-                         window.location.href = result.redirect || 'index.php';
+                        window.location.href = result.redirect || 'index.php';
                     } else {
                         showModal(result.message);
                     }
                 } catch (error) {
-                    console.error('Error:', error);
-                    showModal('An error occurred during verification.');
+                    showModal('Error verifying code.');
                 }
-                return; // Stop here
+                return;
             }
 
-            // --- NORMAL LOGIN ---
+            // Normal Login
             const username = document.getElementById('signin-username').value;
             const password = document.getElementById('signin-password').value;
 
@@ -272,7 +265,7 @@
                     if (result.requires_2fa) {
                         document.getElementById('login-fields').style.display = 'none';
                         document.getElementById('2fa-fields').style.display = 'block';
-                        // showModal(result.message); // Optional: Don't show modal, just show the input
+                        showModal(result.message);
                     } else {
                         window.location.href = result.redirect || 'index.php';
                     }
