@@ -3,10 +3,11 @@ import mysql.connector
 import json
 
 DB_CONFIG = {
-    'user': 'root',
-    'password': '',
-    'host': '127.0.0.1',
-    'database': 'tourist_guide_db'
+    'user': 'if0_41198487',
+    'password': 'uniqueken112',
+    'host': 'sql303.infinityfree.com',
+    'database': 'if0_41198487_tourist_guide_db',
+    'port': 3306
 }
 
 def inspect_db():

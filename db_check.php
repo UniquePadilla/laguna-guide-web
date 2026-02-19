@@ -1,17 +1,27 @@
 <?php
 header('Content-Type: text/plain');
 
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-$dbname = "tourist_guide_db";
+// Load configuration if available
+if (file_exists(__DIR__ . '/db_config.php')) {
+    require __DIR__ . '/db_config.php';
+} else {
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $dbname = "tourist_guide_db";
+}
+
+// Ensure port is set if not from config
+if (!isset($port)) {
+    $port = 3306;
+}
 
 echo "--- Database Diagnostic ---\n";
-echo "Checking connection to $servername with user '$username'...\n";
+echo "Checking connection to $servername:$port with user '$username'...\n";
 
 // 1. Check Connection
 try {
-    $conn = new mysqli($servername, $username, $password);
+    $conn = new mysqli($servername, $username, $password, null, $port);
     if ($conn->connect_error) {
         die("Connection Failed: " . $conn->connect_error . "\n");
     }

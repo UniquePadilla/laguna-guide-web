@@ -15,7 +15,19 @@ try {
     if (!class_exists('mysqli')) {
         die(json_encode(['success' => false, 'message' => 'MySQLi extension missing']));
     }
-    $conn = new mysqli($servername, $username, $password);
+    
+    // Use port if defined, otherwise default
+    $db_port = isset($port) ? $port : 3306;
+    
+    // Try connecting directly to the database if the name is known
+    // This avoids permission issues on shared hosting where CREATE DATABASE is restricted
+    $conn = @new mysqli($servername, $username, $password, $dbname, $db_port);
+
+    if ($conn->connect_error) {
+        // Fallback: Try connecting without database selected (for local dev setup where DB might not exist)
+        $conn = new mysqli($servername, $username, $password, null, $db_port);
+    }
+    
     $conn->set_charset("utf8mb4");
 } catch (Exception $e) {
     die(json_encode(['success' => false, 'message' => 'Connection failed: ' . $e->getMessage()]));
@@ -36,12 +48,15 @@ if ($conn->connect_error) {
     ]));
 }
 
-// Create database if it doesn't exist
-$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
-if ($conn->query($sql) === TRUE) {
-    $conn->select_db($dbname);
-} else {
-    die(json_encode(['success' => false, 'message' => 'Error creating database: ' . $conn->error]));
+// Ensure database is selected
+if (!$conn->select_db($dbname)) {
+    // If selection fails, try to create it (Local Dev Scenario)
+    $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
+    if ($conn->query($sql) === TRUE) {
+        $conn->select_db($dbname);
+    } else {
+        die(json_encode(['success' => false, 'message' => 'Error accessing/creating database: ' . $conn->error]));
+    }
 }
 
 // --- AUTO-INITIALIZATION ---
