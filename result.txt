@@ -1,0 +1,13 @@
+Starting test...
+HTTP: 200
+DEBUG:
+AI Enabled Status: TRUE Key: AIzaS
+Entering Main Logic
+Entering Fallback Strategy. AI Enabled: YES
+AI Enabled
+Calling AI with Context (Length: 4015)
+Asking Cloudflare: @cf/meta/llama-3.1-8b-instruct
+Cloudflare HTTP: 200 Response: {"result":{"response":"Based on available information, the sky appears blue because of a phenomenon 
+AI Reply: Based on available information, the sky appears bl
+REPLY: Based on available information, the sky appears blue because of a phenomenon called Rayleigh scattering. When sunlight enters Earth's atmosphere, it encounters tiny molecules of gases such as nitrogen and oxygen. These molecules scatter the light in all directions, but they scatter shorter (blue) wavelengths more than longer (red) wavelengths. This is why the sky typically appears blue during the daytime, especially in the direction of the sun.
+RAW: {"success":true,"reply":"Based on available information, the sky appears blue because of a phenomenon called Rayleigh scattering. When sunlight enters Earth's atmosphere, it encounters tiny molecules of gases such as nitrogen and oxygen. These molecules scatter the light in all directions, but they scatter shorter (blue) wavelengths more than longer (red) wavelengths. This is why the sky typically appears blue during the daytime, especially in the direction of the sun.","confidence":0.85,"debug"

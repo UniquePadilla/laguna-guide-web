@@ -1,0 +1,15 @@
+Input: Tell me about Rizal Shrine | Reply: **Rizal Shrine** 📍 Location: Calamba, Laguna 🏷️ Type: cultural 📝 Description: A reproduct... | Confidence: 0.95
+Input: How much is the entrance fee? | Reply: The entrance fee for **Rizal Shrine** varies or may be free.  💡 Please check their official page ... | Confidence: 0.95
+Input: How to get there? | Reply: To get to **Rizal Shrine**, you can follow these steps:  1. **By Bus**: Take a bus from Buendia or C... | Confidence: 0.85
+Input: Rizal Shrine | Reply: Ah, **Rizal Shrine**! It's a cultural spot located at Calamba, Laguna. Open: 08:00-16:00. A reproduc... | Confidence: 1
+Input: How much? | Reply: The entrance fee for **Rizal Shrine** varies or may be free.  💡 Please check their official page ... | Confidence: 0.95
+Input: lguana | Reply: Laguna is a province in the Philippines, located in the Calabarzon region in Luzon. It hugs the sout... | Confidence: 0.85
+Input: top sputs | Reply: Top rated spots in Laguna based on user reviews:  - **Japanese Garden** (5⭐ (1 reviews)): A memori... | Confidence: 0.95
+Input: buko pi price | Reply: The entrance fee for **Rizal Shrine** varies or may be free.  💡 Please check their official page ... | Confidence: 0.95
+Input: Suggest a place in Laguna | Reply: **Original Buko Pie (The Orient)** in Los Baños is a famous spot in Laguna. It's known for its deli... | Confidence: 0.85
+Input: Where should I go? | Reply: You're looking for a place to visit in Laguna. There are many great options to choose from, dependin... | Confidence: 0.85
+Input: How to get to Pagsanjan Falls | Reply: Pagsanjan Falls is located at Cavinti/Pagsanjan, Laguna.... | Confidence: 0.6551724137931
+Input: Weather in Laguna | Reply: I can't check the real-time weather yet, but Laguna is generally sunny with occasional rain showers!... | Confidence: 1
+Input: Who are you? | Reply: I'm **Doquerainee**, your AI travel buddy! 🤖💖 I know all the hidden gems and popular spots her... | Confidence: 1
+Input: Hello there | Reply: Hello there! 👋 I'm **Doquerainee**, your friendly guide! Ready to explore Laguna? 🌴... | Confidence: 1
+Input: sfdsfdsf | Reply: It seems like you entered some random characters. Would you like to ask a question or discuss someth... | Confidence: 0.85

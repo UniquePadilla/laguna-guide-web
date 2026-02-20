@@ -1,0 +1,205 @@
+/* Events Section */
+.event-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    padding: 10px;
+}
+
+.event-card {
+    display: flex;
+    flex-direction: row;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease, filter 0.3s ease;
+    min-height: 180px;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    filter: drop-shadow(0 12px 20px rgba(0,0,0,0.2));
+}
+
+/* Left Stub (Date) */
+.event-card .date {
+    background: var(--primary-gradient);
+    color: white;
+    width: 140px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    border-radius: 12px 0 0 12px;
+    
+    /* Typography */
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: 700;
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    
+    /* Perforation line */
+    /* border-right: 2px dashed rgba(255,255,255,0.4); */
+    
+    /* Mask for cutouts */
+    -webkit-mask-image: radial-gradient(circle at top right, transparent 12px, black 12.5px),
+                        radial-gradient(circle at bottom right, transparent 12px, black 12.5px);
+    mask-image: radial-gradient(circle at top right, transparent 12px, black 12.5px),
+                radial-gradient(circle at bottom right, transparent 12px, black 12.5px);
+    -webkit-mask-size: 100% 51%;
+    mask-size: 100% 51%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: top, bottom;
+    mask-position: top, bottom;
+}
+
+.event-card .date::before {
+    content: "ADMIT ONE";
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-90deg);
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    opacity: 0.7;
+    white-space: nowrap;
+    transform-origin: center;
+    bottom: 40px; /* Adjust based on height */
+}
+
+/* Adjust date text */
+.event-card .date {
+    font-size: 1.4rem;
+}
+
+/* Right Main (Details) */
+.event-card .details {
+    background: var(--surface);
+    color: var(--text-dark);
+    flex: 1;
+    padding: 25px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    border-radius: 0 12px 12px 0;
+    
+    /* Mask for cutouts */
+    -webkit-mask-image: radial-gradient(circle at top left, transparent 12px, black 12.5px),
+                        radial-gradient(circle at bottom left, transparent 12px, black 12.5px);
+    mask-image: radial-gradient(circle at top left, transparent 12px, black 12.5px),
+                radial-gradient(circle at bottom left, transparent 12px, black 12.5px);
+    -webkit-mask-size: 100% 51%;
+    mask-size: 100% 51%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: top, bottom;
+    mask-position: top, bottom;
+}
+
+.event-card .details h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+}
+
+.event-card .details p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 0;
+    z-index: 1;
+}
+
+/* Fake Barcode Decoration */
+.event-card .details::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 60%;
+    background: repeating-linear-gradient(
+        180deg,
+        var(--text-light) 0px,
+        var(--text-light) 2px,
+        transparent 2px,
+        transparent 5px
+    );
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* Add a "Ticket Number" decorative element */
+.event-card .details::before {
+    content: "NO. " attr(data-id);
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    opacity: 0.5;
+    letter-spacing: 1px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .event-card {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .event-card .date {
+        width: 100%;
+        height: 80px;
+        flex-direction: row;
+        border-radius: 12px 12px 0 0;
+        border-right: none;
+        /* border-bottom: 2px dashed rgba(255,255,255,0.4); */
+        
+        /* Update mask for horizontal split */
+        -webkit-mask-image: radial-gradient(circle at bottom left, transparent 12px, black 12.5px),
+                            radial-gradient(circle at bottom right, transparent 12px, black 12.5px);
+        mask-image: radial-gradient(circle at bottom left, transparent 12px, black 12.5px),
+                    radial-gradient(circle at bottom right, transparent 12px, black 12.5px);
+        -webkit-mask-size: 51% 100%;
+        mask-size: 51% 100%;
+        -webkit-mask-position: left, right;
+        mask-position: left, right;
+    }
+    
+    .event-card .details {
+        border-radius: 0 0 12px 12px;
+        
+        /* Update mask for horizontal split */
+        -webkit-mask-image: radial-gradient(circle at top left, transparent 12px, black 12.5px),
+                            radial-gradient(circle at top right, transparent 12px, black 12.5px);
+        mask-image: radial-gradient(circle at top left, transparent 12px, black 12.5px),
+                    radial-gradient(circle at top right, transparent 12px, black 12.5px);
+        -webkit-mask-size: 51% 100%;
+        mask-size: 51% 100%;
+        -webkit-mask-position: left, right;
+        mask-position: left, right;
+    }
+    
+    .event-card .date::before {
+        display: none;
+    }
+    
+    .event-card .details::after {
+        display: none; /* Hide barcode on mobile to save space */
+    }
+}

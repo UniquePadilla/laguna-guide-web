@@ -1,0 +1,30 @@
+# Database configuration
+db_config.php
+
+# API Keys and Secrets
+config/api_config.php
+config/mail_config.php
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.iml
+
+# Logs
+*.log
+debug_*.txt
+trace_*.txt
+test_output_*.txt
+check_db_output.txt
+setup_output.txt
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ 

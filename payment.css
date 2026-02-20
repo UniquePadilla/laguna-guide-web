@@ -1,0 +1,482 @@
+/* Modern Elegant Payment Card Design */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Poppins:wght@400;500;600;700&display=swap');
+
+.payment-modal-content {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 650px !important;
+    padding: 20px !important;
+    position: relative;
+    overflow: visible !important;
+}
+
+/* Floating Close Button */
+.close-modal-floating {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #fff;
+    z-index: 100;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.close-modal-floating:hover {
+    transform: rotate(90deg) scale(1.1);
+    background: var(--danger-color);
+    border-color: transparent;
+    box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4);
+}
+
+/* Card Wrapper & 3D Flip */
+.card-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    height: 290px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+    transform-style: preserve-3d;
+}
+
+.card-wrapper.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Common Card Face Styles */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px; /* More rounded like the image */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    border: none;
+    /* Transition visibility to prevent interaction blocking */
+    transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1), visibility 0s linear 0.4s;
+    user-select: none; /* Prevent selection of background text */
+}
+
+/* Front Face - Modern Dark Matte */
+.card-front {
+    background: linear-gradient(135deg, #434343 0%, #000000 100%);
+    padding: 25px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #f0f0f0;
+    transform: rotateY(0deg);
+    visibility: visible;
+}
+
+/* Noise Texture for Realism */
+.card-front::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+');
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0; /* Ensure it is behind content */
+}
+
+/* Chip & Contactless */
+.card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 2;
+    height: 40px; /* Fix height to prevent expansion */
+}
+
+.card-chip-contactless {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-chip {
+    width: 50px;
+    height: 38px;
+    background: linear-gradient(135deg, #d4af37 0%, #f9e38e 50%, #d4af37 100%);
+    border-radius: 6px;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+/* Realistic Chip Lines */
+.card-chip::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 0; width: 100%; height: 1px;
+    background: rgba(0,0,0,0.3);
+    box-shadow: 0 -10px 0 rgba(0,0,0,0.3), 0 10px 0 rgba(0,0,0,0.3);
+}
+.card-chip::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 0; width: 1px; height: 100%;
+    background: rgba(0,0,0,0.3);
+    box-shadow: -15px 0 0 rgba(0,0,0,0.3), 15px 0 0 rgba(0,0,0,0.3);
+}
+
+.contactless-icon {
+    font-size: 24px;
+    color: rgba(255,255,255,0.7);
+    transform: rotate(90deg);
+    margin-top: 200px; /* Positioned bottom right visually in flow, but we can use absolute if needed. The image has it bottom right. */
+    display: none; /* Hide top contactless, we'll position it bottom right */
+}
+
+.card-network-logo-front {
+    font-size: 40px;
+    color: #fff;
+    font-style: italic;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Inputs on Card */
+.card-field-group {
+    position: relative;
+    z-index: 5; /* Increased z-index */
+    margin-top: 20px; /* Reduced margin */
+}
+
+.card-field-group label {
+    display: block;
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.7); /* Increased visibility */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Added shadow for contrast */
+}
+
+.card-input {
+    width: 100%;
+    background: transparent !important; /* Force transparent */
+    border: none !important;
+    color: #ffffff !important; /* Force white */
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+    padding: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    outline: none;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+    opacity: 1 !important;
+}
+
+.card-input::placeholder {
+    color: rgba(255,255,255,0.3) !important; /* Increased visibility */
+}
+
+.card-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: auto;
+    position: relative;
+    z-index: 5; /* Increased z-index */
+    padding-bottom: 5px; /* Slight padding */
+}
+
+.expiry-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.expiry-group .card-input {
+    font-size: 1.1rem;
+    text-align: left;
+    width: 80px;
+}
+
+.card-holder-info {
+    flex: 2;
+    margin-left: 20px;
+}
+
+.card-holder-info .card-input {
+    font-size: 1.1rem;
+    text-align: left;
+    width: 100%;
+}
+
+/* Contactless Icon Bottom Right */
+.card-front::after {
+    content: '\f1eb'; /* fa-wifi */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    font-size: 24px;
+    color: rgba(255,255,255,0.7);
+    transform: rotate(90deg);
+}
+
+/* Back Face - Redesigned */
+.card-back {
+    background: linear-gradient(135deg, #434343 0%, #000000 100%);
+    transform: rotateY(180deg);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none; /* Default: non-interactive */
+}
+
+.magnetic-strip {
+    width: 100%;
+    height: 45px;
+    background: #1a1a1a;
+    margin-top: 25px;
+    position: relative;
+    z-index: 2;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #1a1a1a,
+        #1a1a1a 10px,
+        #222 10px,
+        #222 20px
+    );
+}
+
+.card-back-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+}
+
+.signature-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.signature-strip {
+    flex: 1;
+    height: 40px;
+    background: #fff;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border-radius: 4px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iNDAiPjx0ZXh0IHg9IjEwIiB5PSIyNSIgZm9udC1mYW1pbHk9IkN1cnNpdmUiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiNjY2MiPlNpZ24gSGVyZTwvdGV4dD48L3N2Zz4=');
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+.cvv-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60px;
+    background: transparent;
+}
+
+.cvv-label {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.cvv-input {
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    color: #000;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    padding: 0 5px;
+    text-align: center;
+    border: 2px solid #ddd;
+    font-family: 'Share Tech Mono', monospace;
+    cursor: text;
+    pointer-events: auto !important; /* Always interactive if visible */
+    transition: border-color 0.3s;
+}
+
+.cvv-input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.card-legal-text {
+    font-size: 0.5rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.4;
+    text-align: justify;
+    margin-top: auto;
+    padding-right: 50px; /* Space for hologram */
+}
+
+.card-back-logo {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+}
+
+.card-hologram {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #e0e0e0 0%, #ffffff 50%, #d6d6d6 100%);
+    border-radius: 6px;
+    opacity: 0.8;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Flipped State - STRICT Interaction Handling */
+.card-wrapper.flipped .card-front {
+    pointer-events: none;
+    user-select: none;
+}
+
+.card-wrapper.flipped .card-back {
+    pointer-events: auto;
+    z-index: 100; /* Bring to front */
+}
+
+.card-wrapper.flipped .card-back input {
+    pointer-events: auto !important;
+    cursor: text !important;
+}
+
+/* Payment Footer - Glassmorphic */
+.payment-footer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 20px 30px;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px -10px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 20;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.payment-footer:hover {
+    transform: translateY(-5px);
+}
+
+[data-theme="dark"] .payment-footer {
+    background: rgba(30, 39, 46, 0.8);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.pay-now-btn {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 16px 45px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.pay-now-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.pay-now-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 107, 107, 0.5);
+}
+
+.pay-now-btn:hover::before {
+    transform: translateX(100%);
+}
+
+.pay-now-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.trust-badges {
+    display: flex;
+    gap: 20px;
+    font-size: 1.5rem;
+    color: var(--text-lighter);
+    align-items: center;
+    opacity: 0.8;
+}
+
+@keyframes hologram-shine {
+    0% { transform: translateX(-100%) translateY(-100%); }
+    100% { transform: translateX(100%) translateY(100%); }
+}
+
+@media (max-width: 600px) {
+    .card-wrapper {
+        height: 240px;
+    }
+    
+    .payment-footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
